@@ -1,3 +1,6 @@
 The code leans heavily on higher-order functions (reduce, map, filter) instead of manual loops, which makes each function read almost like a sentence describing what it does — "reduce the log to a sum," "filter the log for long sessions." That's a nice pattern to point out in comments because it's the kind of thing that's easy to use without consciously noticing you're using it.
 Three of the four functions (longSessions, countMood, and to some extent uniqueHobbies) follow the same underlying shape: filter the array down based on some condition on a field. Writing the comments back-to-back made that repetition much more obvious than just reading the code silently — it's the kind of thing you spot when you have to articulate what each line does rather than just skim it.
 Small naming choices matter for readability — countMood immediately tells you it returns a number, while longSessions tells you it returns an array. Consistent, purpose-revealing names make comments almost unnecessary in places.
+The uniqueHobbies function, specifically this part:
+new Set(names)
+It's not complicated once you know what it does, but at first glance it's a bit odd — turning an array into a Set (to remove duplicates) and then immediately spreading it back into an array. It works, just took a second to see why.
