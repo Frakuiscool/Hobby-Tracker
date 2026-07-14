@@ -39,7 +39,20 @@ function countMood(log, moodType) {
   return log.filter(entry => entry.mood === moodType).length;
 }
 
+// IMPROVEMENT SUGGESTION:
+// countMood() and longSessions() both filter the log by a single field/condition.
+// This could be generalized into one reusable function, e.g.:
+//   function filterBy(log, field, predicate) {
+//     return log.filter(entry => predicate(entry[field]));
+//   }
+// Then countMood could become: filterBy(log, "mood", m => m === "relaxed").length
+// This reduces duplication and makes it easy to add new filters (e.g. by "day" or "hobby")
+// without writing a new function each time.
+
 console.log("Total time spent:", totalTime(hobbyLog), "minutes");
 console.log("Unique hobbies:", uniqueHobbies(hobbyLog));
 console.log("Sessions longer than 30 min:", longSessions(hobbyLog, 30));
 console.log("Number of relaxed sessions:", countMood(hobbyLog, "relaxed"));
+
+// New test: check how many "creative" mood sessions were logged
+console.log("Creative sessions:", countMood(hobbyLog, "creative"));
